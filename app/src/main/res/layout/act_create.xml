@@ -19,7 +19,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/crearUser"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:hint="@string/crea_usuario" />
     </com.google.android.material.textfield.TextInputLayout>
 

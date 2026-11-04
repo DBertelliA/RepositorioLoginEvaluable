@@ -8,6 +8,10 @@ android {
         version = release(37)
     }
 
+    viewBinding {
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.example.loginin"
         minSdk = 30

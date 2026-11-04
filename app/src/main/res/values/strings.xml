@@ -1,4 +1,7 @@
 <resources>
+    <string name="sharePref">"shareFitch"</string>
+    <string name="userList"> </string>
+
     <string name="app_name">loginIn</string>
     <string name="usuario">Usuario</string>
     <string name="contrase_a">Contraseña</string>
