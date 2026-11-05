@@ -16,8 +16,7 @@ class CreadorUser : AppCompatActivity(){
 
     private var arrayUser: MutableList<String> = mutableListOf<String>()
     private var arrayPass: MutableList<String> = mutableListOf<String>()
-
-    private var array: MutableList<User> = mutableListOf<User>()
+    private var holderList : MutableList<String> = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +27,8 @@ class CreadorUser : AppCompatActivity(){
 
         enableEdgeToEdge()
         initShare()
+        holderList.add(readerList().replace(Regex("[\\[\\]]"),""))
+
         start()
     }
 
@@ -43,20 +44,17 @@ class CreadorUser : AppCompatActivity(){
         var pass2 = confB.repiteCon.text.toString()
         if(name.isNotEmpty() && pass1.isNotEmpty()){
         if (pass1.equals(pass2)){
-            array.add(User(name,pass1))
-            var name = getString(R.string.sharePref)
-
-            //El hecho de añadir una lista a esats preferencias, me va a obligar a hacer piruetas para sacar el usuario de uno en uno si lo meto como string
-            getSharedPreferences(name, Context.MODE_PRIVATE).edit().putString(getString(R.string.userList), array.toString()).apply()
-            Toast.makeText(this, "Añadido el usuario", Toast.LENGTH_LONG).show()
-
             cleaning()
-            listaCapturer()
 
-            var li = shareF.getString(getString(R.string.userList),"vacio")
 
-            Log.d("---ListaFich---", li.toString())
-            Log.d("---Lista---", array.toString())
+            holderList.add(User(name,pass1).toString())
+
+            var listC = holderList.toString().replace("\\[\\]","")
+            writeThings(listC)
+            readerList()
+            Log.d("--Lista que holdea el holder--", holderList.toString())
+
+
         }else{
             Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show()
         }}else{
@@ -72,6 +70,21 @@ class CreadorUser : AppCompatActivity(){
     fun initShare(){
         var name = getString(R.string.sharePref)
         this.shareF = getSharedPreferences(name, Context.MODE_PRIVATE)
+    }
+
+    fun writeThings(valorS : String){
+        var name = getString(R.string.sharePref)
+
+        //El hecho de añadir una lista a esats preferencias, me va a obligar a hacer piruetas para sacar el usuario de uno en uno si lo meto como string
+        getSharedPreferences(name, Context.MODE_PRIVATE).edit().putString(getString(R.string.userList), valorS).apply()
+        Toast.makeText(this, "Añadido el usuario", Toast.LENGTH_LONG).show()
+    }
+
+    fun readerList(): String {
+        var userP = shareF.getString(getString(R.string.userList),"vacio")
+        Log.d("---Lista la que está---", userP.toString())
+        var valor = userP?.replace("\\[\\]", "");
+        return valor.toString()
     }
 
     fun listaCapturer(){
