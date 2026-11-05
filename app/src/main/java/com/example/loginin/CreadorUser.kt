@@ -49,6 +49,8 @@ class CreadorUser : AppCompatActivity(){
             getSharedPreferences(name, Context.MODE_PRIVATE).edit().putString(getString(R.string.userList), array.toString()).apply()
             Toast.makeText(this, "Añadido el usuario", Toast.LENGTH_LONG).show()
 
+            listaCapturer()
+
             var li = shareF.getString(getString(R.string.userList),"vacio")
 
             Log.d("---ListaFich---", li.toString())
@@ -62,8 +64,25 @@ class CreadorUser : AppCompatActivity(){
 
     fun initShare(){
         var name = getString(R.string.sharePref)
-
         this.shareF = getSharedPreferences(name, Context.MODE_PRIVATE)
+    }
+
+    fun listaCapturer(){
+        var userP = shareF.getString(getString(R.string.userList),"vacio")
+
+        var arrayDeDatos = userP.toString().split(",")
+        var i = false
+        for (x in arrayDeDatos){
+            if(!i) {
+                Log.d("---UsuarioLista---", x)
+                i = true
+            }else{
+                Log.d("---passList---", x)
+                i = false
+            }
+        }
+
+        Log.d("---UsuarioLista---", arrayDeDatos.toString())
     }
 
 }

@@ -11,7 +11,7 @@ class User {
     }
 
     override fun toString(): String {
-        return "nombre='$nombre', pass='$pass'"
+        return "$nombre,$pass"
     }
 
 
