@@ -12,9 +12,10 @@ import com.example.loginin.databinding.ActCreateBinding
 
 class CreadorUser : AppCompatActivity(){
     private lateinit var confB : ActCreateBinding
-
-    private lateinit var user: User
     private lateinit var shareF : SharedPreferences
+
+    private var arrayUser: MutableList<String> = mutableListOf<String>()
+    private var arrayPass: MutableList<String> = mutableListOf<String>()
 
     private var array: MutableList<User> = mutableListOf<User>()
 
@@ -49,6 +50,7 @@ class CreadorUser : AppCompatActivity(){
             getSharedPreferences(name, Context.MODE_PRIVATE).edit().putString(getString(R.string.userList), array.toString()).apply()
             Toast.makeText(this, "Añadido el usuario", Toast.LENGTH_LONG).show()
 
+            cleaning()
             listaCapturer()
 
             var li = shareF.getString(getString(R.string.userList),"vacio")
@@ -62,6 +64,11 @@ class CreadorUser : AppCompatActivity(){
         }
     }
 
+    fun cleaning(){
+        val name = shareF.getString(getString(R.string.userList)," ");
+        getSharedPreferences(name, Context.MODE_PRIVATE).edit().remove(getString(R.string.userList)).apply()
+    }
+
     fun initShare(){
         var name = getString(R.string.sharePref)
         this.shareF = getSharedPreferences(name, Context.MODE_PRIVATE)
@@ -69,18 +76,22 @@ class CreadorUser : AppCompatActivity(){
 
     fun listaCapturer(){
         var userP = shareF.getString(getString(R.string.userList),"vacio")
-
         var arrayDeDatos = userP.toString().split(",")
+
+        arrayUser.clear()
+        arrayPass.clear()
         var i = false
         for (x in arrayDeDatos){
             if(!i) {
-                Log.d("---UsuarioLista---", x)
+                arrayUser.add(x);
                 i = true
             }else{
-                Log.d("---passList---", x)
+                arrayPass.add(x);
                 i = false
             }
         }
+        Log.d("---UsuarioLista---", arrayUser.toString())
+        Log.d("---PassLista---", arrayPass.toString())
 
         Log.d("---UsuarioLista---", arrayDeDatos.toString())
     }
