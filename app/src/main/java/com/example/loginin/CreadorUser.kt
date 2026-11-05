@@ -13,9 +13,6 @@ import com.example.loginin.databinding.ActCreateBinding
 class CreadorUser : AppCompatActivity(){
     private lateinit var confB : ActCreateBinding
     private lateinit var shareF : SharedPreferences
-
-    private var arrayUser: MutableList<String> = mutableListOf<String>()
-    private var arrayPass: MutableList<String> = mutableListOf<String>()
     private var holderList : MutableList<String> = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +32,12 @@ class CreadorUser : AppCompatActivity(){
     fun start(){
         confB.botonCrear.setOnClickListener {
             addUserList()
+            confB.crearUser.setText("")
+            confB.crearCon.setText("")
+            confB.repiteCon.setText("")
+        }
+        confB.botonBorrar.setOnClickListener {
+            borrarLista()
         }
     }
 
@@ -44,14 +47,11 @@ class CreadorUser : AppCompatActivity(){
         var pass2 = confB.repiteCon.text.toString()
         if(name.isNotEmpty() && pass1.isNotEmpty()){
         if (pass1.equals(pass2)){
-            cleaning()
-
-
+            //cleaning()
             holderList.add(User(name,pass1).toString())
 
-            var listC = holderList.toString().replace("\\[\\]","")
-            writeThings(listC)
-            readerList()
+            writeThings(holderList.toString())
+
             Log.d("--Lista que holdea el holder--", holderList.toString())
 
 
@@ -63,7 +63,7 @@ class CreadorUser : AppCompatActivity(){
     }
 
     fun cleaning(){
-        val name = shareF.getString(getString(R.string.userList)," ");
+        var name = getString(R.string.sharePref);
         getSharedPreferences(name, Context.MODE_PRIVATE).edit().remove(getString(R.string.userList)).apply()
     }
 
@@ -83,30 +83,13 @@ class CreadorUser : AppCompatActivity(){
     fun readerList(): String {
         var userP = shareF.getString(getString(R.string.userList),"vacio")
         Log.d("---Lista la que está---", userP.toString())
-        var valor = userP?.replace("\\[\\]", "");
-        return valor.toString()
+        return userP.toString()
     }
 
-    fun listaCapturer(){
-        var userP = shareF.getString(getString(R.string.userList),"vacio")
-        var arrayDeDatos = userP.toString().split(",")
-
-        arrayUser.clear()
-        arrayPass.clear()
-        var i = false
-        for (x in arrayDeDatos){
-            if(!i) {
-                arrayUser.add(x);
-                i = true
-            }else{
-                arrayPass.add(x);
-                i = false
-            }
-        }
-        Log.d("---UsuarioLista---", arrayUser.toString())
-        Log.d("---PassLista---", arrayPass.toString())
-
-        Log.d("---UsuarioLista---", arrayDeDatos.toString())
+    fun borrarLista(){
+        holderList.clear()
+        cleaning()
+        readerList()
+        Toast.makeText(this,"Usuarios eliminados", Toast.LENGTH_LONG).show()
     }
-
 }

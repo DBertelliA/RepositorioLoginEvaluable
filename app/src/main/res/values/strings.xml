@@ -14,4 +14,5 @@
     <string name="repitela_contrase_a">Repitela contraseña</string>
     <string name="crear_usuario">Crear usuario</string>
     <string name="volver">Volver</string>
+    <string name="borrar_usuarios">Borrar usuarios</string>
 </resources>
