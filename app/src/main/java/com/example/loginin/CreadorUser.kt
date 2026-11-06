@@ -81,7 +81,7 @@ class CreadorUser : AppCompatActivity(){
     }
 
     fun readerList(): String {
-        var userP = shareF.getString(getString(R.string.userList),"vacio")
+        var userP = shareF.getString(getString(R.string.userList),"[admin,admin]")
         Log.d("---Lista la que está---", userP.toString())
         return userP.toString()
     }
