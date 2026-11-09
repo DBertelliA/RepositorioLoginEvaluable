@@ -7,31 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mmm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.217">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText2"
+        android:id="@+id/usuarioIntro"
         android:layout_width="369dp"
         android:layout_height="44dp"
         android:hint="@string/usuario"
@@ -42,20 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.167" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText3"
+        android:id="@+id/contraIntro"
         android:layout_width="366dp"
         android:layout_height="43dp"
         android:hint="@string/contrase_a"
@@ -67,7 +32,7 @@
         app:layout_constraintVertical_bias="0.31" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/logIn"
         android:layout_width="226dp"
         android:layout_height="83dp"
         android:text="@string/entrar"
@@ -79,7 +44,7 @@
         app:layout_constraintVertical_bias="0.638" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/crearInter"
         android:layout_width="115dp"
         android:layout_height="66dp"
         android:text="@string/crear"

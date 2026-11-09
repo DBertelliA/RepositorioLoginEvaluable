@@ -1,6 +1,7 @@
 package com.example.loginin
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -33,6 +34,13 @@ class CreadorUser : AppCompatActivity(){
     }
 
     fun start(){
+        if (holderList.size >= 1){
+            var intencion = Intent(this, MainActivity::class.java).apply {
+                putExtra(getString(R.string.userList),holderList.toString())
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+            startActivity(intencion)
+        }
         confB.botonCrear.setOnClickListener {
             addUserList()
             confB.crearUser.setText("")
@@ -41,6 +49,13 @@ class CreadorUser : AppCompatActivity(){
         }
         confB.botonBorrar.setOnClickListener {
             borrarLista()
+        }
+        confB.botonVolver.setOnClickListener {
+            var intencion = Intent(this, MainActivity::class.java).apply {
+                putExtra(getString(R.string.userList),holderList.toString())
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+            startActivity(intencion)
         }
     }
 
@@ -94,5 +109,10 @@ class CreadorUser : AppCompatActivity(){
         cleaning()
         readerList()
         Toast.makeText(this,"Usuarios eliminados", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
     }
 }
