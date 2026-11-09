@@ -26,6 +26,12 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize">
         </activity>
+
+        <activity
+            android:name=".PlaceHolderInit"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
     </application>
 
 </manifest>
