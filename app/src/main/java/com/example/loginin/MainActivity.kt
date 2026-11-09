@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         listaUsers = listaUsers.toString().replace(Regex("[\\[\\]]"),"")?.split(",")?.toMutableList() ?: mutableListOf()
 
         Log.d("--Lista obtenida--", listaUsers.toString())
+
         start()
     }
 
@@ -52,6 +53,14 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        confB.crearInter.setOnClickListener {
+            var intencion = Intent(this, CreadorUser::class.java).apply {
+                putExtra("Back",false)
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
+            startActivity(intencion)
+        }
+        //Log.d("//Bolea", intent.getBooleanExtra("Back",true).toString())
     }
 
     fun comprobar(name : String, pass : String) : Boolean{

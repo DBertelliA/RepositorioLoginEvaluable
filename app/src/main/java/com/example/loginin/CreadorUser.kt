@@ -25,16 +25,16 @@ class CreadorUser : AppCompatActivity(){
 
         enableEdgeToEdge()
         initShare()
-        holderList.add(readerList().replace(Regex("[\\[\\]]"),""))
+        holderList.addAll(readerList().replace(Regex("[\\[\\]]"),"").split(","))
         if(holderList.get(0) == ""){
             holderList.clear()
         }
-
+        candado()
         start()
     }
 
     fun start(){
-        if (holderList.size >= 1){
+        if (holderList.size > 1 && intent.getBooleanExtra("Back",true)){
             var intencion = Intent(this, MainActivity::class.java).apply {
                 putExtra(getString(R.string.userList),holderList.toString())
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -52,11 +52,13 @@ class CreadorUser : AppCompatActivity(){
         }
         confB.botonVolver.setOnClickListener {
             var intencion = Intent(this, MainActivity::class.java).apply {
+                putExtra("Back", true)
                 putExtra(getString(R.string.userList),holderList.toString())
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
             }
             startActivity(intencion)
         }
+        //Log.d("//Bolea", intent.getBooleanExtra("Back",false).toString())
     }
 
     fun addUserList(){
@@ -110,9 +112,17 @@ class CreadorUser : AppCompatActivity(){
         readerList()
         Toast.makeText(this,"Usuarios eliminados", Toast.LENGTH_LONG).show()
     }
+    fun candado(){
+        var llave = intent.getBooleanExtra("Back",false)
+        if(llave){
+            intent.removeExtra("Back")
+        }
+    }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
+        candado()
+
     }
 }
