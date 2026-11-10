@@ -51,12 +51,16 @@ class CreadorUser : AppCompatActivity(){
             borrarLista()
         }
         confB.botonVolver.setOnClickListener {
-            var intencion = Intent(this, MainActivity::class.java).apply {
-                putExtra("Back", true)
-                putExtra(getString(R.string.userList),holderList.toString())
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            if (holderList.isNotEmpty()) {
+                var intencion = Intent(this, MainActivity::class.java).apply {
+                    putExtra("Back", true)
+                    putExtra(getString(R.string.userList), holderList.toString())
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                }
+                startActivity(intencion)
+            }else{
+                Toast.makeText(this, "Necesitas al menos un usuario", Toast.LENGTH_LONG).show()
             }
-            startActivity(intencion)
         }
         //Log.d("//Bolea", intent.getBooleanExtra("Back",false).toString())
     }
