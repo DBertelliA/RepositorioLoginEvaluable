@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             var nombre = confB.usuarioIntro.text.toString()
             var contra = confB.contraIntro.text.toString()
 
-            if((nombre.isNotEmpty() && contra.isNotEmpty()) && comprobar(nombre, contra)){
+            if((nombre.isNotEmpty() && contra.isNotEmpty()) && comprobar(nombre, contra, listaUsers)){
                 var intencion = Intent(this, PlaceHolderInit::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP and Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 }
@@ -62,33 +62,6 @@ class MainActivity : AppCompatActivity() {
         }
         //Log.d("//Bolea", intent.getBooleanExtra("Back",true).toString())
     }
-
-    fun comprobar(name : String, pass : String) : Boolean{
-        var keyU = false
-        var keyP = false;
-        var posi = 0;
-        Log.d("--Lista en la comprobacion--", listaUsers.toString())
-
-
-
-        for(i in 0..listaUsers.size - 1){
-            if(i %2 == 0){
-                if(listaUsers[i].trim() == name){
-                    keyU = true
-                    posi = i
-                    break;
-                }
-            }
-        }
-
-        if(listaUsers[posi+1].trim() == pass){
-            keyP = true
-        }
-
-        return keyU && keyP
-    }
-
-
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
