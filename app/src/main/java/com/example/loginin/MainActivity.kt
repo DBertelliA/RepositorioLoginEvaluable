@@ -75,19 +75,14 @@ class MainActivity : AppCompatActivity() {
             if(i %2 == 0){
                 if(listaUsers[i].trim() == name){
                     keyU = true
+                    posi = i
                     break;
                 }
             }
         }
-        posi = 0
-        for(i in 0..listaUsers.size - 1){
-            if(i %2 == 1){
-                if(listaUsers[i].trim() == pass){
-                    keyP = true
-                    break;
-                }
-            }
-            posi++
+
+        if(listaUsers[posi+1].trim() == pass){
+            keyP = true
         }
 
         return keyU && keyP
